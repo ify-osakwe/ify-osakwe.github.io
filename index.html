@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ify Osakwe — Software Engineer</title>
+  <meta name="description" content="Portfolio of Ify Osakwe — Mobile (Flutter) & Backend (Java/Spring Boot) Engineer." />
+  <meta property="og:title" content="Ify Osakwe — Software Engineer" />
+  <meta property="og:description" content="Mobile (Flutter) & Backend (Java/Spring Boot) Engineer." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ify-osakwe.github.io" />
+  <meta name="theme-color" content="#071a2c" />
+  <!-- TODO: add a favicon.png in the repo root and uncomment below -->
+  <!-- <link rel="icon" type="image/png" href="/favicon.png" /> -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #071a2c;           /* page background */
+      --panel: #0b1f3a;        /* card/nav background */
+      --text: #e5e7eb;         /* base text */
+      --muted: #94a3b8;        /* secondary text */
+      --primary: #22d3ee;      /* accent (change this to rebrand) */
+      --primary-weak: rgba(34, 211, 238, 0.15);
+      --ring: rgba(34, 211, 238, 0.35);
+      --shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+      --radius: 16px;
+      --maxw: 1080px;
+      --ls-body: 0.005em;
+      --ls-heading: 0.015em;
+      --ls-section: 0.02em;
+      --ls-nav: 0.05em;
+      --avatar-ring: 4px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: "Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+      background: linear-gradient(to bottom, #071a2c 0%, #0b1f3a 40%, #0a2f3c 75%, #0b3f4f 100%);
+      color: var(--text);
+      line-height: 1.6;
+      letter-spacing: var(--ls-body);
+      min-height: 100vh;
+    }
+    a { color: var(--text); text-decoration: none; }
+    a:hover { color: white; }
+    .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(1.2) blur(8px);
+      background: linear-gradient(to bottom, rgba(11,18,32,0.85), rgba(11,18,32,0.35));
+      border-bottom: 1px solid rgba(148,163,184,0.1);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { display: flex; gap: 10px; align-items: center; font-weight: 700; letter-spacing: var(--ls-nav); }
+    .dot { width: 10px; height: 10px; background: var(--primary); border-radius: 999px; box-shadow: 0 0 24px var(--primary); }
+    .navlinks { display: flex; gap: 18px; }
+    .navlinks a { color: var(--muted); font-weight: 500; letter-spacing: var(--ls-nav); }
+    .navlinks a:hover { color: var(--text); }
+
+    /* Hero */
+    .hero { padding: 80px 0 40px; }
+    .hero-inner { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px; align-items: center; }
+    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; background: var(--primary-weak); color: #a5f3fc; border: 1px solid var(--ring); border-radius: 999px; font-size: 13px; font-weight: 600; }
+    .title { font-size: clamp(34px, 5vw, 52px); line-height: 1.1; margin: 14px 0; font-weight: 700; font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; letter-spacing: var(--ls-heading); }
+    .subtitle { color: var(--muted); font-size: 18px; margin-bottom: 22px; }
+    .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { padding: 12px 18px; border-radius: 12px; border: 1px solid rgba(148,163,184,0.25); background: var(--panel); color: var(--text); font-weight: 600; box-shadow: var(--shadow); }
+    .btn.primary { background: linear-gradient(135deg, #06b6d4, #22d3ee); color: #05202a; border: none; }
+    .btn:hover { transform: translateY(-1px); transition: transform .15s ease; }
+    .card { background: linear-gradient(180deg, rgba(15,23,42,0.9), rgba(15,23,42,0.75)); border: 1px solid rgba(148,163,184,0.15); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+
+    /* Sections */
+    section { padding: 56px 0; }
+    .section-title { font-size: 24px; margin-bottom: 18px; font-weight: 700; letter-spacing: var(--ls-section); font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .grid { display: grid; gap: 16px; }
+    .grid.skills { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+    .skill { padding: 14px 14px; border-radius: 12px; background: rgba(148,163,184,0.08); border: 1px solid rgba(148,163,184,0.12); font-weight: 600; color: #e2e8f0; }
+
+    .projects-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+    .projects-list > li { padding: 14px 0; }
+    .projects-list > li + li { border-top: 1px solid rgba(148,163,184,0.12); }
+    .project { display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 14px; background: rgba(148,163,184,0.06); border: 1px solid rgba(148,163,184,0.12); }
+    .project h3 { margin: 0; font-size: 18px; }
+    .project p { color: var(--muted); margin: 0; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { font-size: 12px; padding: 4px 8px; border-radius: 999px; background: rgba(148,163,184,0.12); color: #cbd5e1; border: 1px solid rgba(148,163,184,0.18); }
+
+    .contact { text-align: center; }
+    .contact .cta { justify-content: center; }
+
+    footer { padding: 28px 0 56px; color: var(--muted); text-align: center; }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .navlinks { display: none; }
+    }
+
+    /* Skills: detailed list inside a card */
+    .skills-detailed { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+    .skills-detailed li { color: var(--text); }
+    .skills-detailed li strong { color: #a5f3fc; }
+
+    /* Articles list styling */
+    .articles-list { margin: 0; padding-left: 18px; }
+    .articles-list li { margin: 6px 0; }
+    .articles-list a:hover { text-decoration: underline; }
+    .articles-list a { word-break: break-word; }
+
+    /* Make Articles card match Project card color */
+    #articles .card {
+      background: rgba(148,163,184,0.06);
+      border: 1px solid rgba(148,163,184,0.12);
+    }
+
+    /* Make Projects card match Articles card color */
+    #projects .card {
+      background: rgba(148,163,184,0.06);
+      border: 1px solid rgba(148,163,184,0.12);
+    }
+
+    /* Projects: single-card condensed list */
+    .projects-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+    .project-item .project-head { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+    .project-title { font-weight: 700; }
+    .project-desc { color: var(--muted); }
+    .project-tech { color: #cbd5e1; font-size: 14px; }
+    .code-link { text-decoration: underline; }
+
+    /* Hero photo */
+    .hero-photo { display: flex; align-items: center; justify-content: center; }
+    .hero-photo img {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: calc(var(--avatar-ring) - 1px) solid rgba(148,163,184,0.25);
+      box-shadow: 0 0 0 var(--avatar-ring) rgba(34,211,238,0.6), 0 0 32px rgba(34,211,238,0.35), var(--shadow);
+      background: var(--panel);
+      transition: box-shadow .2s ease;
+    }
+
+    .hero-photo img:hover {
+      box-shadow: 0 0 0 calc(var(--avatar-ring) + 1px) rgba(34,211,238,0.9), 0 0 42px rgba(34,211,238,0.55), var(--shadow);
+    }
+
+    @media (max-width: 860px) {
+      .hero-photo img { width: 180px; height: 180px; }
+    }
+
+    @media (max-width: 400px) {
+      .hero-photo img { width: 160px; height: 160px; }
+      .title { font-size: clamp(28px, 7vw, 44px); }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="home">
+        <span class="dot" aria-hidden="true"></span>
+        <span>Ifeakachukwu "Ify" Osakwe</span>
+      </a>
+      <div class="navlinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#articles">Articles</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top" class="container">
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <h1 class="title">Hi, I'm <span style="color:var(--primary)">Ify Osakwe.</span></h1>
+          <h1 class="title">I build dependable mobile & backend software.</h1>
+          <p class="subtitle">Mobile (Flutter) and Backend (Java/Spring Boot). I care about efficient UIs, clean APIs, and smooth deployments.</p>
+          <div class="cta">
+            <a class="btn" href="mailto:ifeakachukwuosakwe@gmail.com">Email</a>
+            <a class="btn" href="https://www.linkedin.com/in/ifykelvinosakwe" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn" href="https://github.com/ify-osakwe" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+        <div class="hero-photo">
+          <img src="avatar.jpeg" alt="Ify Osakwe headshot" width="240" height="240" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">About</h2>
+      <div class="card">
+        <p>Results-driven software engineer with 5 years shipping production mobile and backend systems. On mobile, I build elegant, high-performance Flutter apps for Android & iOS (including POS hardware), with deep links, offline-first UX, and smooth interactions. On the backend, I craft secure, scalable REST APIs with Java & Spring Boot—JWT/OAuth2, validation & testing—containerized with Docker and shipped via GitHub Actions. I care about clean architecture, observability, and small, reviewable PRs; my default is reliable code that's easy to operate.</p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-title">Skills</h2>
+      <div class="card">
+        <ul class="skills-detailed">
+          <li><strong>Mobile:</strong> Flutter, Dart, Kotlin, Android, Swift, Firebase, Deep links (App Links & Universal Links)</li>
+          <li><strong>Backend:</strong> Java, Spring Boot, RESTful design, JWT/OAuth2, validation & testing</li>
+          <li><strong>Data & Infra:</strong> SQL, Docker, CI/CD with GitHub Actions</li>
+          <li><strong>Messaging & realtime:</strong> WebSockets/Pusher, Kafka, gRPC</li>
+          <li><strong>Other:</strong> Git, Gradle/Maven, IntelliJ IDEA, Android Studio, Xcode</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <div class="card">
+  <ul class="projects-list">
+    <li class="project-item">
+      <div class="project-head">
+        <span class="project-title">Piggy Metrics.</span>
+        <a class="code-link" href="https://github.com/ify-osakwe/piggymetrics" target="_blank" rel="noopener">code</a>
+      </div>
+      <div class="project-desc">Microservice Architecture with Spring Boot, Spring Cloud and Docker</div>
+      <div class="project-tech">Java · Spring Boot · Spring Cloud</div>
+      <div><a class="code-link" href="https://github.com/ify-osakwe/piggymetrics" target="_blank" rel="noopener">code</a></div>
+    </li>
+
+    <li class="project-item">
+      <div class="project-head">
+        <span class="project-title">Blog API.</span>
+        <a class="code-link" href="https://github.com/ify-osakwe/blog-api" target="_blank" rel="noopener">code</a>
+      </div>
+      <div class="project-desc">Spring Boot REST API with JWT auth, roles/permissions, comments & categories. Production‑ready structure.</div>
+      <div class="project-tech">Java · Spring Boot · PostgreSQL · JWT</div>
+      <div><a class="code-link" href="https://github.com/ify-osakwe/blog-api" target="_blank" rel="noopener">code</a></div>
+    </li>
+
+    <li class="project-item">
+      <div class="project-head">
+        <span class="project-title">Ticketing App.</span>
+        <a class="code-link" href="https://github.com/ify-osakwe/ticketing-app" target="_blank" rel="noopener">code</a>
+      </div>
+      <div class="project-desc">Clean Flutter UI with wishlist, receipt printouts, and state management done right.</div>
+      <div class="project-tech">Flutter · Riverpod</div>
+      <div><a class="code-link" href="https://github.com/ify-osakwe/ticketing-app" target="_blank" rel="noopener">code</a></div>
+    </li>
+  </ul>
+</div>
+    </section>
+    
+    <section id="articles">
+      <h2 class="section-title">Articles</h2>
+      <div class="card">
+        <ul class="articles-list">
+          <li><a href="https://www.linkedin.com/pulse/pathvariable-vs-requestparam-spring-boot-when-use-them-osakwe-s4klf" target="_blank" rel="noopener">PathVariable vs RequestParam in Spring Boot: When to use them</a></li>
+          <li><a href="https://www.linkedin.com/pulse/implementing-jpa-inheritance-strategies-spring-boot-osakwe-iqlsf" target="_blank" rel="noopener">Implementing JPA Inheritance Strategies in Spring Boot</a></li>
+          <li><a href="https://www.linkedin.com/pulse/from-basics-custom-queries-exploring-jparepository-spring-osakwe-msdaf" target="_blank" rel="noopener">From Basics to Custom Queries: Exploring JpaRepository in Spring Data JPA (Part 1)</a></li>
+          <li><a href="https://www.linkedin.com/pulse/modelling-complex-relationships-spring-boot-using-embedded-osakwe-umgvf" target="_blank" rel="noopener">Modelling Complex Relationships in Spring Boot Using @Embedded and @Embeddable</a></li>
+          <li><a href="https://www.linkedin.com/pulse/spring-boot-onetoone-mapping-explained-unidirectional-ify-osakwe-vnw0f" target="_blank" rel="noopener">Spring Boot @OneToOne Mapping Explained: Unidirectional and Bidirectional Relationships</a></li>
+          <li><a href="https://www.linkedin.com/pulse/from-basics-custom-queries-exploring-jparepository-spring-ify-osakwe-ykerf" target="_blank" rel="noopener">From Basics to Custom Queries: Exploring JpaRepository in Spring Data JPA (Part 2)</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Ify Osakwe. Built with semantic HTML & a dash of CSS.
+  </footer>
+
+  <script>
+    // Smooth anchor scrolling (only for same‑page links)
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id.length > 1) {
+          const el = document.querySelector(id);
+          if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        }
+      });
+    });
+    // Year stamp
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
