@@ -36,11 +36,16 @@
       --avatar-ring: 4px;
     }
     * { box-sizing: border-box; }
-    html, body { height: 100%; }
+    html, body { 
+      height: 100%; 
+      background: linear-gradient(180deg, #071a2c 0%, #0a2f3c 75%, #0b3f4f 100%);
+      background-attachment: fixed;
+    }
     body {
       margin: 0;
       font-family: "Work Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
-      background: linear-gradient(to bottom, #071a2c 0%, #0b1f3a 40%, #0a2f3c 75%, #0b3f4f 100%);
+      /* background: linear-gradient(to bottom, #071a2c 0%, #0b1f3a 40%, #0a2f3c 75%, #0b3f4f 100%); */
+      background: transparent;
       color: var(--text);
       line-height: 1.6;
       letter-spacing: var(--ls-body);
@@ -122,6 +127,13 @@
 
     /* Make Projects card match Articles card color */
     #projects .card {
+      background: rgba(148,163,184,0.06);
+      border: 1px solid rgba(148,163,184,0.12);
+    }
+
+    /* Make About & Skills cards match Projects/Articles card color */
+    #about .card,
+    #skills .card {
       background: rgba(148,163,184,0.06);
       border: 1px solid rgba(148,163,184,0.12);
     }
