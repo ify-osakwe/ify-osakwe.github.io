@@ -137,6 +137,10 @@
       .navlinks a:hover {
         color: var(--text);
       }
+      .navlinks a.active {
+        color: var(--text);
+        font-weight: 700;
+      }
 
       /* Hero */
       .hero {
@@ -194,6 +198,9 @@
         color: #111111;
         font-weight: 600;
         box-shadow: var(--shadow);
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
       }
       .btn.primary {
         background: #111111;
@@ -202,7 +209,7 @@
       }
       .btn:hover {
         transform: translateY(-1px);
-        transition: transform 0.15s ease;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
       }
       .card {
         background: #f9f9f9;
@@ -215,6 +222,16 @@
       /* Sections */
       section {
         padding: 24px 0;
+        opacity: 0;
+        transform: translateY(16px);
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease;
+      }
+      section.visible,
+      section.hero {
+        opacity: 1;
+        transform: none;
       }
       section + section {
         border-top: 1px solid rgba(0, 0, 0, 0.06);
@@ -250,7 +267,6 @@
         font-weight: 600;
         color: #111111;
       }
-
 
       .project {
         display: flex;
@@ -296,23 +312,50 @@
         text-align: center;
       }
 
+      /* Hamburger button (hidden on desktop) */
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+        padding: 8px;
+        color: var(--text);
+      }
+
       /* Responsive */
       @media (max-width: 860px) {
+        .nav-toggle {
+          display: block;
+        }
         .hero-inner {
           grid-template-columns: 1fr;
         }
         .navlinks {
           display: none;
+          position: absolute;
+          top: 64px;
+          right: 20px;
+          flex-direction: column;
+          background: var(--panel);
+          border: 1px solid rgba(0, 0, 0, 0.1);
+          border-radius: 12px;
+          padding: 12px 20px;
+          box-shadow: var(--shadow);
+          gap: 12px;
+        }
+        .navlinks.open {
+          display: flex;
         }
         /* Center avatar on mobile */
         .hero-photo {
-          justify-self: center; /* center the grid item horizontally */
+          justify-self: center;
           width: 100%;
-          justify-content: center; /* center content inside the flex container */
+          justify-content: center;
         }
         .hero-photo img {
-          display: block; /* remove inline baseline weirdness */
-          margin: 0 auto; /* hard-center the image */
+          display: block;
+          margin: 0 auto;
         }
         /* Center CTA buttons on mobile */
         .cta {
@@ -394,12 +437,10 @@
         text-decoration: underline;
       }
       .articles-list a::after {
-        content: ' ↗';
+        content: " ↗";
         font-size: 11px;
         opacity: 0.4;
       }
-
-
 
       /* Projects: single-card condensed list */
       .projects-list {
@@ -420,6 +461,28 @@
       }
       .project-desc {
         color: var(--muted);
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      .project-desc.expanded {
+        -webkit-line-clamp: unset;
+        overflow: visible;
+      }
+      .read-more-btn {
+        background: none;
+        border: none;
+        color: var(--muted);
+        font-size: 13px;
+        cursor: pointer;
+        padding: 4px 0;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+      .read-more-btn:hover {
+        color: var(--text);
       }
       .project-tech {
         color: #444444;
@@ -427,6 +490,14 @@
       }
       .code-link {
         text-decoration: underline;
+      }
+      .proprietary-label {
+        font-size: 13px;
+        color: var(--muted);
+        opacity: 0.6;
+        cursor: default;
+        font-style: italic;
+        text-decoration: none;
       }
 
       /* Hero photo */
@@ -490,6 +561,7 @@
           <a href="#projects">Projects</a>
           <a href="#articles">Articles</a>
         </div>
+        <button class="nav-toggle" aria-label="Toggle menu">☰</button>
       </div>
     </nav>
 
@@ -527,10 +599,9 @@
             <img
               src="avatar.jpeg"
               alt="Ify Osakwe headshot"
-              loading="lazy"
+              fetchpriority="high"
               decoding="async"
             />
-
           </div>
         </div>
       </section>
@@ -608,17 +679,53 @@
           <ul class="projects-list">
             <li class="project-item">
               <div class="project-head">
-                <span class="project-title">Piggy Metrics.</span>
+                <span class="project-title">RexAfrica</span>
               </div>
-              <div class="project-desc">
-                Microservice Architecture with Spring Boot, Spring Cloud and
-                Docker
+              <div class="project-desc" id="rex-project-desc">
+                <!-- Loaded dynamically from projects.js to keep index.html clean -->
               </div>
-              <div class="project-tech">Java · Spring Boot · Spring Cloud</div>
+              <div>
+                <span class="proprietary-label">Proprietary</span>
+                <a
+                  class="code-link"
+                  href="https://play.google.com/store/apps/details?id=com.rexmfb.mobile"
+                  target="_blank"
+                  rel="noopener"
+                  >Play Store</a
+                >
+                <a
+                  class="code-link"
+                  href="https://apps.apple.com/ng/app/rexafrica/id6472193945"
+                  target="_blank"
+                  rel="noopener"
+                  >App Store</a
+                >
+              </div>
+            </li>
+
+            <li class="project-item">
+              <div class="project-head">
+                <span class="project-title">RexAfrica POS</span>
+              </div>
+              <div class="project-desc" id="rex-pos-project-desc">
+                <!-- Loaded dynamically from projects.js to keep index.html clean -->
+              </div>
+              <div>
+                <span class="proprietary-label">Proprietary</span>
+              </div>
+            </li>
+
+            <li class="project-item">
+              <div class="project-head">
+                <span class="project-title">Tea App</span>
+              </div>
+              <div class="project-desc" id="tea-project-desc">
+                <!-- Loaded dynamically from projects.js to keep index.html clean -->
+              </div>
               <div>
                 <a
                   class="code-link"
-                  href="https://github.com/ify-osakwe/piggymetrics"
+                  href="https://github.com/ify-osakwe/tea"
                   target="_blank"
                   rel="noopener"
                   >Code</a
@@ -628,19 +735,15 @@
 
             <li class="project-item">
               <div class="project-head">
-                <span class="project-title">Blog API.</span>
+                <span class="project-title">Sky App</span>
               </div>
-              <div class="project-desc">
-                Spring Boot REST API with JWT auth, roles/permissions, comments
-                & categories. Production‑ready structure.
-              </div>
-              <div class="project-tech">
-                Java · Spring Boot · PostgreSQL · JWT
+              <div class="project-desc" id="sky-project-desc">
+                <!-- Loaded dynamically from projects.js to keep index.html clean -->
               </div>
               <div>
                 <a
                   class="code-link"
-                  href="https://github.com/ify-osakwe/blog-api"
+                  href="https://github.com/ify-osakwe/sky"
                   target="_blank"
                   rel="noopener"
                   >Code</a
@@ -650,21 +753,13 @@
 
             <li class="project-item">
               <div class="project-head">
-                <span class="project-title">Ticketing App.</span>
+                <span class="project-title">Rex Baas Core</span>
               </div>
-              <div class="project-desc">
-                Clean Flutter UI with wishlist, receipt printouts, and state
-                management done right.
+              <div class="project-desc" id="rex-baas-core-desc">
+                <!-- Loaded dynamically from projects.js to keep index.html clean -->
               </div>
-              <div class="project-tech">Flutter · Riverpod</div>
               <div>
-                <a
-                  class="code-link"
-                  href="https://github.com/ify-osakwe/ticketing-app"
-                  target="_blank"
-                  rel="noopener"
-                  >Code</a
-                >
+                <span class="proprietary-label">Proprietary</span>
               </div>
             </li>
           </ul>
@@ -737,6 +832,7 @@
       © <span id="year"></span> Ify Osakwe. Built with HTML & a dash of CSS.
     </footer>
 
+    <script src="projects.js"></script>
     <script>
       // Smooth anchor scrolling (only for same‑page links)
       document.querySelectorAll('a[href^="#"]').forEach((a) => {
@@ -749,10 +845,54 @@
               el.scrollIntoView({ behavior: "smooth", block: "start" });
             }
           }
+          // Close mobile menu on link click
+          document.querySelector(".navlinks")?.classList.remove("open");
         });
       });
+
       // Year stamp
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Hamburger toggle
+      document.querySelector(".nav-toggle")?.addEventListener("click", () => {
+        document.querySelector(".navlinks").classList.toggle("open");
+      });
+
+      // Section fade-in on scroll
+      const sectionObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              sectionObserver.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      document
+        .querySelectorAll("section")
+        .forEach((s) => sectionObserver.observe(s));
+
+      // Active nav link highlight
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll(".navlinks a");
+      const navObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              navLinks.forEach((link) => {
+                link.classList.toggle(
+                  "active",
+                  link.getAttribute("href") === `#${entry.target.id}`,
+                );
+              });
+            }
+          });
+        },
+        { rootMargin: "-40% 0px -60% 0px" },
+      );
+      sections.forEach((s) => navObserver.observe(s));
     </script>
   </body>
 </html>
